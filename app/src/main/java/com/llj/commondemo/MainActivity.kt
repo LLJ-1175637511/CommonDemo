@@ -1,11 +1,20 @@
 package com.llj.commondemo
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.annotation.SuppressLint
+import com.llj.commondemo.base.BaseActivity
+import com.llj.commondemo.base.startNewActivity
+import com.llj.commondemo.databinding.ActivityMainBinding
+import com.llj.commondemo.bubble.BubbleActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+@SuppressLint("ClickableViewAccessibility")
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    override fun buildBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+
+    override fun onCreate() {
+        binding.bubbleActivity.setOnClickListener {
+            startNewActivity(BubbleActivity::class.java)
+        }
     }
+
 }
