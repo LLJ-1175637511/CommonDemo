@@ -9,12 +9,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:text="skjflakfnakfnalskfnak.snf.aksnf.aksnfafafna.s阿萨法，苏菲娜，苏菲娜说法发吧，是你的吧，沙漠风暴安守本分，阿曼，啊没法比，马桑妈啊部分 买吧， 没办法不释放马上补发，AB，阿曼法，amba"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="skjflakfnakfnalskfnak.snf.aksnf.aksnfafafna.s阿萨法，苏菲娜，苏菲娜说法发吧，是你的吧，沙漠风暴安守本分，阿曼，啊没法比，马桑妈啊部分 买吧， 没办法不释放马上补发，AB，阿曼法，amba"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:text="skjflakfnakfnalskfnak.snf.aksnf.aksnfafafna.s阿萨法，苏菲娜，苏菲娜说法发吧，是你的吧，沙漠风暴安守本分，阿曼，啊没法比，马桑妈啊部分 买吧， 没办法不释放马上补发，AB，阿曼法，amba"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <com.llj.commondemo.sliding_conflict.pullrefresh.PullRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:background="@color/black"
             android:layout_width="match_parent"
@@ -36,19 +45,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView2"
+                    android:id="@+id/recyclerView"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.llj.commondemo.sliding_conflict.pullrefresh.PullRefreshLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerView"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
     </LinearLayout>
 
 </com.llj.commondemo.sliding_conflict.MyScrollView>
