@@ -18,6 +18,8 @@ package com.llj.commondemo.sliding_conflict.pullrefresh;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -47,6 +49,9 @@ import androidx.core.view.NestedScrollingParentHelper;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.ListViewCompat;
 
+import java.util.Arrays;
+
+
 /**
  * The SwipeRefreshLayout should be used whenever the user can refresh the
  * contents of a view via a vertical swipe gesture. The activity that
@@ -71,7 +76,7 @@ import androidx.core.widget.ListViewCompat;
 public class PullRefreshLayout extends ViewGroup implements NestedScrollingParent3,
         NestedScrollingParent2, NestedScrollingChild3, NestedScrollingChild2, NestedScrollingParent,
         NestedScrollingChild {
-    private static final String TAG = "PullRefreshLayout";
+    private static final String TAG = "NestedScrollDemo";
 
     public static final int DEFAULT_SLINGSHOT_DISTANCE = -1;
 
@@ -232,58 +237,57 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
         }
     }
 
-//    @Parcelize
-//    static class SavedState extends BaseSavedState {
-//        final boolean mRefreshing;
-//
-//        /**
-//         * Constructor called from {@link PullRefreshLayout#onSaveInstanceState()}
-//         */
-//        SavedState(Parcelable superState, boolean refreshing) {
-//            super(superState);
-//            this.mRefreshing = refreshing;
-//        }
-//
-//        /**
-//         * Constructor called from {@link #CREATOR}
-//         */
-//        SavedState(Parcel in) {
-//            super(in);
-//            mRefreshing = in.readByte() != 0;
-//        }
-//
-//        @Override
-//        public void writeToParcel(Parcel out, int flags) {
-//            super.writeToParcel(out, flags);
-//            out.writeByte(mRefreshing ? (byte) 1 : (byte) 0);
-//        }
-//
-//        public static final Creator<SavedState> CREATOR =
-//                new Creator<SavedState>() {
-//                    @Override
-//                    public SavedState createFromParcel(Parcel in) {
-//                        return new SavedState(in);
-//                    }
-//
-//                    @Override
-//                    public SavedState[] newArray(int size) {
-//                        return new SavedState[size];
-//                    }
-//                };
-//    }
+    static class SavedState extends BaseSavedState {
+        final boolean mRefreshing;
 
-//    @Override
-//    protected Parcelable onSaveInstanceState() {
-//        Parcelable superState = super.onSaveInstanceState();
-//        return new SavedState(superState, mRefreshing);
-//    }
+        /**
+         * Constructor called from {@link PullRefreshLayout#onSaveInstanceState()}
+         */
+        SavedState(Parcelable superState, boolean refreshing) {
+            super(superState);
+            this.mRefreshing = refreshing;
+        }
 
-//    @Override
-//    protected void onRestoreInstanceState(Parcelable state) {
-//        SavedState savedState = (SavedState) state;
-//        super.onRestoreInstanceState(savedState.getSuperState());
-//        setRefreshing(savedState.mRefreshing);
-//    }
+        /**
+         * Constructor called from {@link #CREATOR}
+         */
+        SavedState(Parcel in) {
+            super(in);
+            mRefreshing = in.readByte() != 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeByte(mRefreshing ? (byte) 1 : (byte) 0);
+        }
+
+        public static final Creator<SavedState> CREATOR =
+                new Creator<SavedState>() {
+                    @Override
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
+
+                    @Override
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        return new SavedState(superState, mRefreshing);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        SavedState savedState = (SavedState) state;
+        super.onRestoreInstanceState(savedState.getSuperState());
+        setRefreshing(savedState.mRefreshing);
+    }
 
     @Override
     protected void onDetachedFromWindow() {
@@ -452,17 +456,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
         if (refreshing && mRefreshing != refreshing) {
             mRefreshing = refreshing;
             mNotify = false;
-            int endTarget;
-//            if (!this.mUsingCustomStart) {
-//                endTarget = this.mSpinnerOffsetEnd + this.mOriginalOffsetTop;
-//            } else {
-//                endTarget = this.mSpinnerOffsetEnd;
-//            }
-//
-//            this.setTargetOffsetTopAndBottom(endTarget - this.mCurrentTargetOffsetTop);
-//            animateOffsetToCorrectPosition(endTarget - this.mCurrentTargetOffsetTop, null);
-
-            animateOffsetToCorrectPosition(this.mCurrentTargetOffsetTop, null);
+            animateOffsetToCorrectPosition(mCurrentTargetOffsetTop, null);
             doRefresh();
         } else {
             setRefreshing(refreshing, false /* notify */);
@@ -584,8 +578,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
         }
         final View child = mTarget;
         final int childLeft = getPaddingLeft();
-//        final int childTop = getPaddingTop() + mCurrentTargetOffsetTop + mProgressView.getMeasuredHeight();
-        final int childTop = getPaddingTop() - mCurrentTargetOffsetTop + mOriginalOffsetTop;
+        final int childTop = getPaddingTop() + mCurrentTargetOffsetTop + mProgressView.getMeasuredHeight();
         final int childWidth = width - getPaddingLeft() - getPaddingRight();
         final int childHeight = height - getPaddingTop() - getPaddingBottom();
         child.layout(childLeft, childTop, childLeft + childWidth, childTop + childHeight);
@@ -757,6 +750,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     public void onNestedScroll(@NonNull View target, int dxConsumed, int dyConsumed,
                                int dxUnconsumed, int dyUnconsumed, @ViewCompat.NestedScrollType int type,
                                @NonNull int[] consumed) {
+        Log.d(TAG, "child onNestedScroll dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed + " consumed:" + Arrays.toString(consumed));
         if (type != ViewCompat.TYPE_TOUCH) {
             return;
         }
@@ -804,6 +798,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public boolean onStartNestedScroll(View child, View target, int axes, int type) {
+        Log.d(TAG,"child onStartNestedScroll isVertical:" + String.valueOf(((axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0)));
         if (type == ViewCompat.TYPE_TOUCH) {
             return onStartNestedScroll(child, target, axes);
         } else {
@@ -813,7 +808,8 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public void onNestedScrollAccepted(View child, View target, int axes, int type) {
-        // Should always be true because onStartNestedScroll returns false for all type !=
+        Log.d(TAG,"child onNestedScrollAccepted return:" + (isEnabled() && !mReturningToStart && !mRefreshing && !mIsAnimating));
+                // Should always be true because onStartNestedScroll returns false for all type !=
         // ViewCompat.TYPE_TOUCH, but check just in case.
         if (type == ViewCompat.TYPE_TOUCH) {
             onNestedScrollAccepted(child, target, axes);
@@ -832,6 +828,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     @Override
     public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed,
                                int dyUnconsumed, int type) {
+        Log.d(TAG, "child onNestedScroll dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed);
         onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, type,
                 mNestedScrollingV2ConsumedCompat);
     }
@@ -840,6 +837,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed, int type) {
         // Should always be true because onStartNestedScroll returns false for all type !=
         // ViewCompat.TYPE_TOUCH, but check just in case.
+        Log.d(TAG, "child onNestedPreScroll dy:" + dy + " consumed:" + Arrays.toString(consumed));
         if (type == ViewCompat.TYPE_TOUCH) {
             onNestedPreScroll(target, dx, dy, consumed);
         }
@@ -849,12 +847,15 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
+        Log.d(TAG,"child onStartNestedScroll return:" + (isEnabled() && !mReturningToStart && !mRefreshing && !mIsAnimating
+                && (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0));
         return isEnabled() && !mReturningToStart && !mRefreshing && !mIsAnimating
                 && (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
     }
 
     @Override
     public void onNestedScrollAccepted(View child, View target, int axes) {
+        Log.d(TAG,"child onNestedScrollAccepted axes & ViewCompat.SCROLL_AXIS_VERTICAL:" + (axes & ViewCompat.SCROLL_AXIS_VERTICAL));
         // Reset the counter of how much leftover scroll needs to be consumed.
         mNestedScrollingParentHelper.onNestedScrollAccepted(child, target, axes);
         // Dispatch up to the nested parent
@@ -865,6 +866,8 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
+        Log.d(TAG, "child onNestedPreScroll dy:" + dy + " consumed:" + Arrays.toString(consumed));
+
         // If we are in the middle of consuming, a scroll, then we want to move the spinner back up
         // before allowing the list to scroll
         if (dy > 0 && mTotalUnconsumed > 0) {
@@ -917,6 +920,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     @Override
     public void onNestedScroll(final View target, final int dxConsumed, final int dyConsumed,
                                final int dxUnconsumed, final int dyUnconsumed) {
+        Log.d(TAG, "child onNestedScroll dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed);
         onNestedScroll(target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed,
                 ViewCompat.TYPE_TOUCH, mNestedScrollingV2ConsumedCompat);
     }
@@ -940,6 +944,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
                                      int dyUnconsumed, @Nullable int[] offsetInWindow,
                                      @ViewCompat.NestedScrollType int type,
                                      @NonNull int[] consumed) {
+        Log.d(TAG, "child dispatchNestedScroll dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed + " consumed:" + Arrays.toString(consumed));
         if (type == ViewCompat.TYPE_TOUCH) {
             mNestedScrollingChildHelper.dispatchNestedScroll(dxConsumed, dyConsumed, dxUnconsumed,
                     dyUnconsumed, offsetInWindow, type, consumed);
@@ -950,6 +955,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public boolean startNestedScroll(int axes, int type) {
+        Log.d(TAG, "child startNestedScroll axes:"+String.valueOf(((axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0))+ " type:"+type);
         return type == ViewCompat.TYPE_TOUCH && startNestedScroll(axes);
     }
 
@@ -968,6 +974,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     @Override
     public boolean dispatchNestedScroll(int dxConsumed, int dyConsumed, int dxUnconsumed,
                                         int dyUnconsumed, int[] offsetInWindow, int type) {
+        Log.d(TAG, "child dispatchNestedScroll dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed);
         return type == ViewCompat.TYPE_TOUCH && mNestedScrollingChildHelper.dispatchNestedScroll(
                 dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed, offsetInWindow, type);
     }
@@ -975,6 +982,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     @Override
     public boolean dispatchNestedPreScroll(int dx, int dy, int[] consumed, int[] offsetInWindow,
                                            int type) {
+        Log.d(TAG, "child dispatchNestedPreScroll dy:" + dy + " consumed:" + Arrays.toString(consumed) + " type:"+ type);
         return type == ViewCompat.TYPE_TOUCH && dispatchNestedPreScroll(dx, dy, consumed,
                 offsetInWindow);
     }
@@ -983,16 +991,19 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public void setNestedScrollingEnabled(boolean enabled) {
+        Log.d(TAG, "child setNestedScrollingEnabled enabled:" + enabled);
         mNestedScrollingChildHelper.setNestedScrollingEnabled(enabled);
     }
 
     @Override
     public boolean isNestedScrollingEnabled() {
+        Log.d(TAG, "child isNestedScrollingEnabled :" + mNestedScrollingChildHelper.isNestedScrollingEnabled());
         return mNestedScrollingChildHelper.isNestedScrollingEnabled();
     }
 
     @Override
     public boolean startNestedScroll(int axes) {
+        Log.d(TAG, "child startNestedScroll axes:"+String.valueOf(((axes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0)));
         return mNestedScrollingChildHelper.startNestedScroll(axes);
     }
 
@@ -1003,18 +1014,21 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
 
     @Override
     public boolean hasNestedScrollingParent() {
+        Log.d(TAG, "child hasNestedScrollingParent:"+mNestedScrollingChildHelper.hasNestedScrollingParent());
         return mNestedScrollingChildHelper.hasNestedScrollingParent();
     }
 
     @Override
     public boolean dispatchNestedScroll(int dxConsumed, int dyConsumed, int dxUnconsumed,
                                         int dyUnconsumed, int[] offsetInWindow) {
+        Log.d(TAG, "child dispatchNestedScroll dyConsumed:" + dyConsumed + " dyUnconsumed:" + dyUnconsumed);
         return mNestedScrollingChildHelper.dispatchNestedScroll(dxConsumed, dyConsumed,
                 dxUnconsumed, dyUnconsumed, offsetInWindow);
     }
 
     @Override
     public boolean dispatchNestedPreScroll(int dx, int dy, int[] consumed, int[] offsetInWindow) {
+        Log.d(TAG, "child dispatchNestedPreScroll dy:" + dy + " consumed:" + Arrays.toString(consumed));
         return mNestedScrollingChildHelper.dispatchNestedPreScroll(
                 dx, dy, consumed, offsetInWindow);
     }
@@ -1048,9 +1062,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
         //额外可下拉的距离
         float slingshotDist = mCustomSlingshotDistance > mTotalDragDistance
                 ? mCustomSlingshotDistance - mTotalDragDistance
-                : (mUsingCustomStart
-                ? mSpinnerOffsetEnd - mOriginalOffsetTop
-                : mSpinnerOffsetEnd);
+                : mSpinnerOffsetEnd;
         float tensionSlingshotPercent = Math.max(0, Math.min(extraOS, slingshotDist * 2) / slingshotDist);
         float tensionPercent = (float) ((tensionSlingshotPercent / 4)
                 - Math.pow((tensionSlingshotPercent / 4), 2)) * 2f;
@@ -1255,12 +1267,7 @@ public class PullRefreshLayout extends ViewGroup implements NestedScrollingParen
     private final Animation mAnimateToCorrectPosition = new Animation() {
         @Override
         public void applyTransformation(float interpolatedTime, Transformation t) {
-            int endTarget = 0;
-            if (!mUsingCustomStart) {
-                endTarget = mSpinnerOffsetEnd - Math.abs(mOriginalOffsetTop);
-            } else {
-                endTarget = mSpinnerOffsetEnd;
-            }
+            int endTarget = mSpinnerOffsetEnd - Math.abs(mOriginalOffsetTop);
             int targetTop = (mFrom + (int) ((endTarget - mFrom) * interpolatedTime));
             int offset = targetTop - mProgressView.getTop();
             setTargetOffsetTopAndBottom(offset);

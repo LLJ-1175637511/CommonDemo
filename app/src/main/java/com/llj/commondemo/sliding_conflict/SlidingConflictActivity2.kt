@@ -28,6 +28,11 @@ class SlidingConflictActivity2 : BaseActivity<ActivitySlidingConflict2Binding>()
             initList()
         }
         initList()
+//        binding.swipeRefreshLayout.addRefreshCanScrollListener(object :MyPullRefreshLayout.ICanScrollListener{
+//            override fun isTop(): Boolean {
+//                return !binding.consecutiveLayout.canScrollVertically(-1)
+//            }
+//        })
     }
 
     private fun initList() {
@@ -35,7 +40,8 @@ class SlidingConflictActivity2 : BaseActivity<ActivitySlidingConflict2Binding>()
         repeat(100) {
             list.add("数据${it}")
         }
-        binding.recyclerView.adapter = ItemAdapter(list)
+//        binding.recyclerView.adapter = ItemAdapter(list)
+//        binding.recyclerView2.adapter = ItemAdapter(list)
     }
 
     class ItemAdapter(private val itemList: List<String>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {

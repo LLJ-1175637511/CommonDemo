@@ -53,25 +53,25 @@ public class NestedScrollLayout extends NestedScrollView {
   private void init() {
       mFlingHelper = new FlingHelper(getContext());
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//          setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//              @Override
-//              public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                  if (isStartFling) {
-//                      totalDy = 0;
-//                      isStartFling = false;
-//                  }
-//                  if (scrollY == 0) {
-//                      Log.i(TAG, "TOP SCROLL");
-//                      // refreshLayout.setEnabled(true);
-//                  }
-//                  if (scrollY == (getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-//                      Log.i(TAG, "BOTTOM SCROLL");
-//                      dispatchChildFling();
-//                  }
-//                  //在RecyclerView fling情况下，记录当前RecyclerView在y轴的偏移
-//                  totalDy += scrollY - oldScrollY;
-//              }
-//          });
+          setOnScrollChangeListener(new View.OnScrollChangeListener() {
+              @Override
+              public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                  if (isStartFling) {
+                      totalDy = 0;
+                      isStartFling = false;
+                  }
+                  if (scrollY == 0) {
+                      Log.i(TAG, "TOP SCROLL");
+                      // refreshLayout.setEnabled(true);
+                  }
+                  if (scrollY == (getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                      Log.i(TAG, "BOTTOM SCROLL");
+                      dispatchChildFling();
+                  }
+                  //在RecyclerView fling情况下，记录当前RecyclerView在y轴的偏移
+                  totalDy += scrollY - oldScrollY;
+              }
+          });
       }
 
   }
@@ -106,9 +106,9 @@ public class NestedScrollLayout extends NestedScrollView {
 
   private void dispatchChildFling() {
       if (velocityY != 0) {
-          Double splineFlingDistance = mFlingHelper.getSplineFlingDistance(velocityY);
+          double splineFlingDistance = mFlingHelper.getSplineFlingDistance(velocityY);
           if (splineFlingDistance > totalDy) {
-              childFling(mFlingHelper.getVelocityByDistance(splineFlingDistance - Double.valueOf(totalDy)));
+              childFling(mFlingHelper.getVelocityByDistance(splineFlingDistance - (double) totalDy));
           }
       }
       totalDy = 0;
