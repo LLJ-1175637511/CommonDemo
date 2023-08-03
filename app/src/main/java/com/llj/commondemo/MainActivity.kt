@@ -22,9 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         binding.slidingConflict2.setOnClickListener {
             startNewActivity(SlidingConflictActivity2::class.java)
         }
-        binding.pagView.composition = PAGFile.Load(assets, "pull_refresh_loading.pag")
-        binding.pagView.setRepeatCount(0)
-        binding.pagView.play()
     }
 
 }

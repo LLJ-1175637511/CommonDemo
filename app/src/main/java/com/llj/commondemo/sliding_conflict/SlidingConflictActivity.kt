@@ -35,7 +35,7 @@ class SlidingConflictActivity : BaseActivity<ActivitySlidingConflictBinding>() {
         repeat(100) {
             list.add("数据${it}")
         }
-        binding.recyclerView.adapter = ItemAdapter(list)
+//        binding.recyclerView.adapter = ItemAdapter(list)
     }
 
     class ItemAdapter(private val itemList: List<String>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
