@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".sliding_conflict.SlidingConflictActivity" />
         <activity android:name=".sliding_conflict.SlidingConflictActivity2" />
+        <activity android:name="com.llj.commondemo.bubble.BubbleActivity" />
     </application>
 
 </manifest>
