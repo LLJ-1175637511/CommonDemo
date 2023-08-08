@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll"
+    android:focusableInTouchMode="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,41 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/slidingConflict"
+        <EditText
+            android:id="@+id/edittext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="滑动冲突"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/slidingConflict2"
+            android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="滑动冲突2"
+            android:text="next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/bubbleActivity"
+            android:id="@+id/front"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="气泡"
+            android:text="front"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/edittextActivity"
+     <Button
+            android:id="@+id/hideKeyboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="输入框焦点"
+            android:text="隐藏键盘"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

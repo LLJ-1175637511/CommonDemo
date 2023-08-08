@@ -7,6 +7,7 @@ import com.llj.commondemo.databinding.ActivityMainBinding
 import com.llj.commondemo.sliding_conflict.SlidingConflictActivity
 import com.llj.commondemo.sliding_conflict.SlidingConflictActivity2
 import com.llj.commondemo.sliding_conflict.bubble.BubbleActivity
+import com.llj.commondemo.sliding_conflict.edittext.EditTextActivity
 
 @SuppressLint("ClickableViewAccessibility")
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -22,6 +23,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         binding.bubbleActivity.setOnClickListener {
             startNewActivity(BubbleActivity::class.java)
+        }
+        binding.edittextActivity.setOnClickListener {
+            startNewActivity(EditTextActivity::class.java)
         }
     }
 

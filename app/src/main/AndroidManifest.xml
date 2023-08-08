@@ -21,6 +21,7 @@
         <activity android:name=".sliding_conflict.SlidingConflictActivity" />
         <activity android:name=".sliding_conflict.SlidingConflictActivity2" />
         <activity android:name=".sliding_conflict.bubble.BubbleActivity" />
+        <activity android:name=".sliding_conflict.edittext.EditTextActivity" />
     </application>
 
 </manifest>
