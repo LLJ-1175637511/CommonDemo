@@ -1,4 +1,4 @@
-package com.llj.commondemo.sliding_conflict;
+package com.llj.commondemo.sliding_conflict.ui.widget;
 
 import android.content.Context;
 import android.os.Build;
@@ -7,15 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.llj.commondemo.sliding_conflict.other.FlingHelper;
 
 public class NestedScrollLayout extends NestedScrollView {
-  private View topView;
-  private ViewGroup contentView;
+
   private static final String TAG = "NestedScrollLayout";
 
   public NestedScrollLayout(Context context) {
@@ -50,7 +49,7 @@ public class NestedScrollLayout extends NestedScrollView {
    */
   private int velocityY = 0;
 
-  private void init() {
+  void init() {
       mFlingHelper = new FlingHelper(getContext());
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
           setOnScrollChangeListener(new View.OnScrollChangeListener() {
@@ -73,36 +72,8 @@ public class NestedScrollLayout extends NestedScrollView {
               }
           });
       }
-
   }
 
-
-  @Override
-  protected void onFinishInflate() {
-      super.onFinishInflate();
-      topView = ((ViewGroup) getChildAt(0)).getChildAt(0);
-      contentView = (ViewGroup) ((ViewGroup) getChildAt(0)).getChildAt(1);
-  }
-
-  @Override
-  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-      // 调整contentView的高度为父容器高度，使之填充布局，避免父容器滚动后出现空白
-      super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-      ViewGroup.LayoutParams lp = contentView.getLayoutParams();
-      lp.height = getMeasuredHeight();
-      contentView.setLayoutParams(lp);
-  }
-
-  @Override
-  public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
-      Log.i("NestedScrollLayout", getScrollY()+"::onNestedPreScroll::"+topView.getMeasuredHeight());
-      // 向上滑动。若当前topview可见，需要将topview滑动至不可见
-      boolean hideTop = dy > 0 && getScrollY() < topView.getMeasuredHeight();
-      if (hideTop) {
-          scrollBy(0, dy);
-          consumed[1] = dy;
-      }
-  }
 
   private void dispatchChildFling() {
       if (velocityY != 0) {
@@ -116,7 +87,7 @@ public class NestedScrollLayout extends NestedScrollView {
   }
 
   private void childFling(int velY) {
-      RecyclerView childRecyclerView = getChildRecyclerView(contentView);
+      RecyclerView childRecyclerView = getChildRecyclerView((ViewGroup) getRootView());
       if (childRecyclerView != null) {
           childRecyclerView.fling(0, velY);
       }

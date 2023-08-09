@@ -1,4 +1,4 @@
-package com.llj.commondemo.sliding_conflict.bubble
+package com.llj.commondemo.bubble
 
 import android.content.Context
 import android.graphics.Rect

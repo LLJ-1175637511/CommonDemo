@@ -18,10 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".sliding_conflict.SlidingConflictActivity" />
-        <activity android:name=".sliding_conflict.SlidingConflictActivity2" />
-        <activity android:name=".sliding_conflict.bubble.BubbleActivity" />
-        <activity android:name=".sliding_conflict.edittext.EditTextActivity" />
+        <activity android:name=".sliding_conflict.ui.activity.SlidingConflictActivity" />
+        <activity android:name=".bubble.BubbleActivity" />
+        <activity android:name=".edittext.EditTextActivity" />
     </application>
 
 </manifest>

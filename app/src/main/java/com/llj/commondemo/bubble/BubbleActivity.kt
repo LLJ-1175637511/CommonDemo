@@ -1,16 +1,9 @@
-package com.llj.commondemo.sliding_conflict.bubble
+package com.llj.commondemo.bubble
 
 import android.annotation.SuppressLint
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.llj.commondemo.base.BaseActivity
-import com.llj.commondemo.base.startNewActivity
 import com.llj.commondemo.databinding.ActivityBubbleBinding
-import com.llj.commondemo.databinding.ActivityMainBinding
-import com.llj.commondemo.sliding_conflict.SlidingConflictActivity
-import com.llj.commondemo.sliding_conflict.SlidingConflictActivity2
-import org.libpag.PAGFile
 
 @SuppressLint("ClickableViewAccessibility")
 class BubbleActivity : BaseActivity<ActivityBubbleBinding>() {

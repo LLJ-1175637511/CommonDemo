@@ -1,4 +1,4 @@
-package com.llj.commondemo.sliding_conflict
+package com.llj.commondemo.sliding_conflict.ui.widget
 
 import android.annotation.SuppressLint
 import android.content.Context

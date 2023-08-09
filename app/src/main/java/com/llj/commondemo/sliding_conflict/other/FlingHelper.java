@@ -1,4 +1,4 @@
-package com.llj.commondemo.sliding_conflict;
+package com.llj.commondemo.sliding_conflict.other;
 
 import android.content.Context;
 import android.view.ViewConfiguration;

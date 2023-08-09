@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="skjflakfnakfnalskfnak.snf.aksnf.aksnfafafna.s阿萨法，苏菲娜，苏菲娜说法发吧，是你的吧，沙漠风暴安守本分，阿曼，啊没法比，马桑妈啊部分 买吧， 没办法不释放马上补发，AB，阿曼法，amba" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="skjflakfnakfnalskfnak.snf.aksnf.aksnfafafna.s阿萨法，苏菲娜，苏菲娜说法发吧，是你的吧，沙漠风暴安守本分，阿曼，啊没法比，马桑妈啊部分 买吧， 没办法不释放马上补发，AB，阿曼法，amba" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

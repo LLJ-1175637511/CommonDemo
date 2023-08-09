@@ -10,7 +10,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.llj.commondemo.sliding_conflict.bubble.StudyShadowView
+    <com.llj.commondemo.bubble.StudyShadowView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -39,6 +39,6 @@
             android:text="打开上课提醒，课程直播不错过"
             android:textColor="@color/black"
             android:textSize="16sp" />
-    </com.llj.commondemo.sliding_conflict.bubble.StudyShadowView>
+    </com.llj.commondemo.bubble.StudyShadowView>
 
 </LinearLayout>
