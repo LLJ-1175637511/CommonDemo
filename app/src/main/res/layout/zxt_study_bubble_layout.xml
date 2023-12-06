@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    tools:background="@android:color/holo_green_light"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.llj.commondemo.bubble.StudyShadowView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bubbleUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/zxt_study_course_remind_popover"
+            app:layout_constraintEnd_toEndOf="@id/courseRemind"
+            app:layout_constraintStart_toStartOf="@id/courseRemind"
+            app:layout_constraintTop_toBottomOf="@id/courseRemind" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="20dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:background="@drawable/zxt_study_shape_course_remind_bubble"
+            android:text="打开上课提醒，课程直播不错过"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </com.llj.commondemo.bubble.StudyShadowView>
+
+</LinearLayout>
