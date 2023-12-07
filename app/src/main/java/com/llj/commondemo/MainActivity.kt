@@ -1,20 +1,25 @@
 package com.llj.commondemo
 
 import android.annotation.SuppressLint
-import com.llj.commondemo.base.BaseActivity
-import com.llj.commondemo.base.startNewActivity
+import android.os.Bundle
+import com.llj.commondemo.core.base.BaseBindingActivity
+import com.llj.commondemo.core.base.BaseFragmentActivity
 import com.llj.commondemo.databinding.ActivityMainBinding
-import com.llj.commondemo.bubble.BubbleActivity
 
 @SuppressLint("ClickableViewAccessibility")
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseFragmentActivity<ActivityMainBinding>() {
 
     override fun buildBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
-    override fun onCreate() {
-        binding.bubbleActivity.setOnClickListener {
-            startNewActivity(BubbleActivity::class.java)
-        }
+    private val mainFragment by lazy { MainFragment() }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        addMainContainerFragment()
+    }
+
+    private fun addMainContainerFragment() {
+        supportFragmentManager.beginTransaction().add(binding.mainFragmentContainer.id, mainFragment, mainFragment.tag).commit()
     }
 
 }

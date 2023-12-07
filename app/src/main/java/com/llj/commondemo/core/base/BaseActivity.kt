@@ -1,32 +1,21 @@
-package com.llj.commondemo.base
+package com.llj.commondemo.core.base
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewbinding.ViewBinding
 
 /**
  * @author liulinjie @ Zhihu Inc.
  * @since 07-24-2023
  */
-abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
-
-    lateinit var binding: VB
-
-    abstract fun buildBinding(): VB
-
-    abstract fun onCreate()
+abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if (isFullScreen()) transparentStatusBar(window)
         super.onCreate(savedInstanceState)
-        binding = buildBinding()
-        setContentView(binding.root)
-        onCreate()
     }
 
     open fun isFullScreen() = false

@@ -1,17 +1,21 @@
-package com.llj.commondemo.base
+package com.llj.commondemo.core.base
 
-import android.app.Activity
 import android.content.Intent
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 
 /**
  * @author liulinjie @ Zhihu Inc.
  * @since 07-24-2023
  */
 
-fun AppCompatActivity.startNewActivity(clazz: Class<*>) {
+fun FragmentActivity.startNewActivity(clazz: Class<*>) {
     startActivity(Intent(this, clazz))
+}
+
+fun Fragment.startNewActivity(clazz: Class<*>) {
+    requireActivity().startNewActivity(clazz)
 }
 
 fun Int.dp(): Int {

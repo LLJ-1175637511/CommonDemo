@@ -1,22 +1,18 @@
 package com.llj.commondemo.bubble
 
 import android.annotation.SuppressLint
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.llj.commondemo.base.BaseActivity
-import com.llj.commondemo.databinding.ActivityBubbleBinding
+import com.llj.commondemo.core.base.BaseFragment
+import com.llj.commondemo.databinding.FragmentBubbleBinding
 
 @SuppressLint("ClickableViewAccessibility")
-class BubbleActivity : BaseActivity<ActivityBubbleBinding>() {
-
-    override fun buildBinding(): ActivityBubbleBinding = ActivityBubbleBinding.inflate(layoutInflater)
+class BubbleFragment : BaseFragment<FragmentBubbleBinding>() {
 
     private val bubbleCoverView by lazy {
         //气泡的遮罩层 点击全屏任意区域都使气泡消失
-        ZxtBubbleView2(this)
-    }
-
-    override fun onCreate() {
-        showBubble()
+        ZxtBubbleView2(requireContext())
     }
 
     private fun showBubble() {
@@ -36,6 +32,14 @@ class BubbleActivity : BaseActivity<ActivityBubbleBinding>() {
         getWindowContentView().removeView(bubbleCoverView)
     }
 
-    private fun getWindowContentView() = window.decorView.findViewById<FrameLayout>(android.R.id.content)
+    private fun getWindowContentView() = requireActivity().window.decorView.findViewById<FrameLayout>(android.R.id.content)
+
+    override fun buildBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentBubbleBinding {
+        return FragmentBubbleBinding.inflate(inflater, container, false)
+    }
+
+    override fun onViewCreate() {
+        showBubble()
+    }
 
 }
