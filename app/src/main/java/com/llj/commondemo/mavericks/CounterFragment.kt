@@ -6,12 +6,14 @@ import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.llj.commondemo.core.base.BaseFragment
+import com.llj.commondemo.core.router.AttachedActivity
 import com.llj.commondemo.databinding.FragmentCounterBinding
 
 /**
  * @author liulinjie @ Zhihu Inc.
  * @since 12-06-2023
  */
+@AttachedActivity(CounterActivity::class)
 class CounterFragment : BaseFragment<FragmentCounterBinding>(), MavericksView {
 
     private val viewModel: CounterMavericksVM by fragmentViewModel()
