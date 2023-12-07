@@ -23,6 +23,7 @@ open class HostActivity : BaseFragmentActivity<ActivityHostBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+        //从intent中解析自定义ZHIntent 如果为空 则使用错误 不该跳转到当前activity
         val zhIntent = parseZHIntent(intent)
         if (zhIntent == null) {
             finish()

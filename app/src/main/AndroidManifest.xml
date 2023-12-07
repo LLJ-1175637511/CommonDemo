@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".core.host.HostActivity" />
+        <activity android:name=".mavericks.CounterActivity" />
     </application>
 
 </manifest>

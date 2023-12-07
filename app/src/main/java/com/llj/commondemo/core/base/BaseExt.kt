@@ -1,9 +1,9 @@
 package com.llj.commondemo.core.base
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.llj.commondemo.app.BaseApplication
 
 /**
  * @author liulinjie @ Zhihu Inc.

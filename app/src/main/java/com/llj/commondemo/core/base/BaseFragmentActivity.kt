@@ -1,12 +1,11 @@
 package com.llj.commondemo.core.base
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import com.llj.commondemo.core.host.HostActivity
 import com.llj.commondemo.core.launcher.FragmentLauncher
 import com.llj.commondemo.core.router.RouterConst
+import com.llj.commondemo.core.router.RouterUtils
 import com.llj.commondemo.core.structure.ZHIntent
 
 /**
@@ -27,8 +26,9 @@ abstract class BaseFragmentActivity<VB : ViewBinding> : BaseBindingActivity<VB>(
     }
 
     override fun startFragmentForResult(zhIntent: ZHIntent, target: Fragment?, requestCode: Int) {
-        val intent = Intent(this, HostActivity::class.java)
+        val intent = Intent(this, RouterUtils.getComponentActivity(zhIntent.clazz))
         intent.putExtra(RouterConst.EXTRA_ZHINTENT, zhIntent)
         startActivity(intent)
     }
+
 }
