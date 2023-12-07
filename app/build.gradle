@@ -62,8 +62,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    //pag依赖
     implementation 'com.tencent.tav:libpag:latest.release'
     implementation("androidx.exifinterface:exifinterface:1.3.6")
     implementation 'com.github.donkingliang:ConsecutiveScroller:4.6.4'
-
+    //mavericks
+    implementation 'com.airbnb.android:mavericks:3.0.6'
 }
